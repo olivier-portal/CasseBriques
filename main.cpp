@@ -14,7 +14,7 @@ int main() {
   
     sf::sleep(std::chrono::milliseconds(300));
 
-    unsigned int screenWidth = 800;
+    unsigned int screenWidth = 900;
     unsigned int screenHeight = 600;
 
     sf::RenderWindow window;
@@ -38,43 +38,50 @@ int main() {
     // Draw paddle & set start position
     sf::RectangleShape paddle(sf::Vector2f{100.f, 20.f});
     paddle.setFillColor(sf::Color(255, 165, 0));
-    paddle.setPosition(sf::Vector2f{(screenWidth / 2) - (paddle.getSize().x / 2), screenHeight - (10.f + paddle.getSize().y)});
+    paddle.setPosition(sf::Vector2f{(screenWidth / 2.f) - (paddle.getSize().x / 2), screenHeight - (10.f + paddle.getSize().y)});
 
     // Draw ball & set start position
     sf::CircleShape ball(10.f);
     ball.setFillColor(sf::Color::White);
-    ball.setPosition(sf::Vector2f{(screenWidth / 2) - ball.getRadius(), paddle.getPosition().y - (10.f + ball.getRadius() * 2)});
+    ball.setPosition(sf::Vector2f{(screenWidth / 2.f) - ball.getRadius(), paddle.getPosition().y - (ball.getRadius() * 2.f)});
 
-    // Put window boundaries
-    float leftBoundary = 0.f;
-    float rightBoundary = static_cast<float>(screenWidth);
-    float rightPaddleBoundary = static_cast<float>(screenWidth) - paddle.getSize().x;
-
-    // Set boundaries for paddle movement
-    sf::FloatRect boundyBox = paddle.getGlobalBounds();
-
-    float paddleX = paddle.getPosition().x;
-
+    // Movement const
+    const float paddleSpeed = 10.f;
+    const float leftBoundary = 0.f;
+    const float rightBoundary = static_cast<float>(screenWidth);
 
     while (window.isOpen()) {
         while (auto e = window.pollEvent()) {
             if (e->is<sf::Event::Closed>()) window.close();
         }
+
+        // Movement
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left)) {
-            paddle.move({-10.f, 0.f});
-            ball.move({-10.f, 0.f});
+            paddle.move({-paddleSpeed, 0.f});
+            ball.move({-paddleSpeed, 0.f});
         }
             
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right)) {
-            paddle.move({10.f, 0.f});
-            ball.move({10.f, 0.f});
+            paddle.move({paddleSpeed, 0.f});
+            ball.move({paddleSpeed, 0.f});
         }
 
-            if (paddleX < leftBoundary) {
-        paddle.setPosition(sf::Vector2f{leftBoundary, paddle.getPosition().y});
-            } else if (paddleX > rightPaddleBoundary) {
-                paddle.setPosition(sf::Vector2f{rightPaddleBoundary, paddle.getPosition().y});
-            }
+        // Get paddle position
+        sf::Vector2f pos = paddle.getPosition();
+
+        // Boundary check
+        if (pos.x < leftBoundary) { 
+            pos.x = leftBoundary;
+        }
+        else if (pos.x + paddle.getSize().x > rightBoundary) {
+            pos.x = rightBoundary - paddle.getSize().x;
+        }
+
+        paddle.setPosition(pos);
+
+        // Make ball follow paddle before launch
+        ball.setPosition(sf::Vector2f{paddle.getPosition().x + paddle.getSize().x / 2.f - ball.getRadius(),
+                                      paddle.getPosition().y - (ball.getRadius() * 2.f)});
             
         window.clear(sf::Color(57,61,71));
         window.draw(paddle);
