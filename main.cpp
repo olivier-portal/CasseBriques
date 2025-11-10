@@ -41,6 +41,10 @@ int main() {
         while (auto e = window.pollEvent()) {
             if (e->is<sf::Event::Closed>()) window.close();
         }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
+            raquette.move({-1.f, 0.f});
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
+            raquette.move({1.f, 0.f});
         window.clear(sf::Color(57,61,71));
         window.draw(raquette);
         window.display();
@@ -48,4 +52,5 @@ int main() {
 
     std::cout << "[INFO] Fenetre fermee.\n";
     return 0;
+
 }
