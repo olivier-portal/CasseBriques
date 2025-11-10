@@ -40,10 +40,19 @@ int main() {
     paddle.setFillColor(sf::Color(255, 165, 0));
     paddle.setPosition(sf::Vector2f{(screenWidth / 2.f) - (paddle.getSize().x / 2), screenHeight - (10.f + paddle.getSize().y)});
 
-    // Draw ball & set start position
+    // Draw ball
     sf::CircleShape ball(10.f);
     ball.setFillColor(sf::Color::White);
-    ball.setPosition(sf::Vector2f{(screenWidth / 2.f) - ball.getRadius(), paddle.getPosition().y - (ball.getRadius() * 2.f)});
+
+    // Make ball follow paddle before launch
+        auto ballBeforeLaunch = [&]() {
+            ball.setPosition(sf::Vector2f{paddle.getPosition().x + paddle.getSize().x / 2.f - ball.getRadius(),
+                                      paddle.getPosition().y - (ball.getRadius() * 2.f)});
+        };
+
+    // Ball status
+    bool isLaunched = false;
+    sf::Vector2f ballVelocity = {0.f, 0.f};
 
     // Movement const
     const float paddleSpeed = 10.f;
@@ -66,6 +75,10 @@ int main() {
             ball.move({paddleSpeed, 0.f});
         }
 
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)) {
+            ball.move({0.f, paddleSpeed});
+        }
+
         // Get paddle position
         sf::Vector2f pos = paddle.getPosition();
 
@@ -79,9 +92,18 @@ int main() {
 
         paddle.setPosition(pos);
 
-        // Make ball follow paddle before launch
-        ball.setPosition(sf::Vector2f{paddle.getPosition().x + paddle.getSize().x / 2.f - ball.getRadius(),
-                                      paddle.getPosition().y - (ball.getRadius() * 2.f)});
+        // Launch ball
+        if (!isLaunched && sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)) {
+            isLaunched = true;
+            ballVelocity = sf::Vector2f{4.f, -6.f};
+        }
+
+        // Keep ball on paddle before launch
+        if (!isLaunched) {
+            ballBeforeLaunch();
+        } else {
+            ball.move(ballVelocity);
+        }
             
         window.clear(sf::Color(57,61,71));
         window.draw(paddle);
