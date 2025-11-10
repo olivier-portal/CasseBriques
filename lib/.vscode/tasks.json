@@ -2,18 +2,21 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "build sfml app",
+      "label": "build (MSYS2 MinGW64 + SFML)",
       "type": "shell",
-      "command": "g++",
+      "command": "C:/msys64/mingw64/bin/g++",
       "args": [
         "main.cpp",
-        "-IC:/SFML-3.0.2/include",
-        "-LC:/SFML-3.0.2/lib",
         "-lsfml-graphics",
         "-lsfml-window",
         "-lsfml-system",
         "-o", "app.exe"
       ],
+      "options": {
+        "env": {
+          "PATH": "C:\\msys64\\mingw64\\bin;${env:PATH}"
+        }
+      },
       "group": "build",
       "problemMatcher": ["$gcc"]
     }
