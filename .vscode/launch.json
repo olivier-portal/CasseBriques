@@ -2,17 +2,19 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Run app.exe (MinGW64)",
+      "name": "Run app.exe (MSYS2 MinGW64)",
       "type": "cppdbg",
       "request": "launch",
       "program": "${workspaceFolder}/app.exe",
+      "args": [],
       "cwd": "${workspaceFolder}",
-      "MIMode": "gdb",
-      "miDebuggerPath": "C:/msys64/mingw64/bin/gdb.exe",
-      "externalConsole": true,
       "environment": [
         { "name": "PATH", "value": "C:\\msys64\\mingw64\\bin;${env:PATH}" }
-      ]
+      ],
+      "externalConsole": true,
+      "MIMode": "gdb",
+      "miDebuggerPath": "C:/msys64/mingw64/bin/gdb.exe",
+      "preLaunchTask": "build (MinGW64 + SFML)"
     }
   ]
 }

@@ -58,6 +58,14 @@ int main() {
     // Movement const
     const float paddleSpeed = 10.f;
 
+    // AABB collision detection
+     auto aabbIntersects = [](const sf::FloatRect& a, const sf::FloatRect& b) {
+        return (a.position.x < b.position.x + b.size.x) &&
+            (a.position.x + a.size.x > b.position.x) &&
+            (a.position.y < b.position.y + b.size.y) &&
+            (a.position.y + a.size.y > b.position.y);
+        };
+
     while (window.isOpen()) {
         while (auto e = window.pollEvent()) {
             if (e->is<sf::Event::Closed>()) window.close();
@@ -109,6 +117,33 @@ int main() {
                 ballVelocity.y = std::abs(ballVelocity.y);
                 ball.setPosition(sf::Vector2f{ball.getPosition().x, 0.f});
             }
+
+        // Ball bouncing on paddle
+
+
+        if (ballVelocity.y > 0.f && 
+        aabbIntersects(ball.getGlobalBounds(), paddle.getGlobalBounds())) {
+
+        // Inverse la direction verticale
+        ballVelocity.y = -std::abs(ballVelocity.y);
+
+        // Ajuste légèrement la position pour éviter de “coller” à la raquette
+        ball.setPosition({
+            ball.getPosition().x,
+            paddle.getPosition().y - ball.getRadius() * 2.f - 0.1f
+        });
+
+        // Variation de la vitesse horizontale selon le point d’impact
+        float paddleCenter = paddle.getPosition().x + paddle.getSize().x / 2.f;
+        float hitX = ball.getPosition().x + ball.getRadius();
+        float offset = (hitX - paddleCenter) / (paddle.getSize().x / 2.f);
+        ballVelocity.x = 7.f * offset;
+        }
+
+        // Ball reset if below screen
+        if (ball.getPosition().y > screenHeight) {
+            isLaunched = false; ballVelocity = {0.f,0.f}; resetBallOnPaddle();
+        }
             
         window.clear(sf::Color(57,61,71));
         window.draw(paddle);
