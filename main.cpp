@@ -45,7 +45,7 @@ int main() {
     ball.setFillColor(sf::Color::White);
 
     // Make ball follow paddle before launch
-        auto ballBeforeLaunch = [&]() {
+        auto resetBallOnPaddle = [&]() {
             ball.setPosition(sf::Vector2f{paddle.getPosition().x + paddle.getSize().x / 2.f - ball.getRadius(),
                                       paddle.getPosition().y - (ball.getRadius() * 2.f)});
         };
@@ -53,43 +53,29 @@ int main() {
     // Ball status
     bool isLaunched = false;
     sf::Vector2f ballVelocity = {0.f, 0.f};
+    resetBallOnPaddle();
 
     // Movement const
     const float paddleSpeed = 10.f;
-    const float leftBoundary = 0.f;
-    const float rightBoundary = static_cast<float>(screenWidth);
 
     while (window.isOpen()) {
         while (auto e = window.pollEvent()) {
             if (e->is<sf::Event::Closed>()) window.close();
         }
 
-        // Movement
+        // Paddle movement
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left)) {
             paddle.move({-paddleSpeed, 0.f});
-            ball.move({-paddleSpeed, 0.f});
         }
             
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right)) {
-            paddle.move({paddleSpeed, 0.f});
-            ball.move({paddleSpeed, 0.f});
-        }
-
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)) {
-            ball.move({0.f, paddleSpeed});
+            paddle.move({+paddleSpeed, 0.f});
         }
 
         // Get paddle position
         sf::Vector2f pos = paddle.getPosition();
-
-        // Boundary check
-        if (pos.x < leftBoundary) { 
-            pos.x = leftBoundary;
-        }
-        else if (pos.x + paddle.getSize().x > rightBoundary) {
-            pos.x = rightBoundary - paddle.getSize().x;
-        }
-
+        if (pos.x < 0) pos.x = 0;
+        if (pos.x + paddle.getSize().x > screenWidth) pos.x = screenWidth - paddle.getSize().x;
         paddle.setPosition(pos);
 
         // Launch ball
@@ -100,10 +86,29 @@ int main() {
 
         // Keep ball on paddle before launch
         if (!isLaunched) {
-            ballBeforeLaunch();
+            resetBallOnPaddle();
         } else {
             ball.move(ballVelocity);
         }
+
+        // Ball bouncing on walls
+
+        // left Wall
+        if (ball.getPosition().x <= 0) {
+                ballVelocity.x = std::abs(ballVelocity.x);
+                ball.setPosition(sf::Vector2f{0.f, ball.getPosition().y});
+            }
+        // right wall
+        if (ball.getPosition().x + ball.getRadius()*2.f >= screenWidth) {
+                ballVelocity.x = -std::abs(ballVelocity.x);
+                ball.setPosition(sf::Vector2f{screenWidth - ball.getRadius()*2.f, ball.getPosition().y});
+            }
+
+        // top wall
+        if (ball.getPosition().y <= 0) {
+                ballVelocity.y = std::abs(ballVelocity.y);
+                ball.setPosition(sf::Vector2f{ball.getPosition().x, 0.f});
+            }
             
         window.clear(sf::Color(57,61,71));
         window.draw(paddle);
