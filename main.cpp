@@ -119,21 +119,19 @@ int main() {
             }
 
         // Ball bouncing on paddle
-
-
         if (ballVelocity.y > 0.f && 
         aabbIntersects(ball.getGlobalBounds(), paddle.getGlobalBounds())) {
 
-        // Inverse la direction verticale
+        // Reverse speed on Y axis
         ballVelocity.y = -std::abs(ballVelocity.y);
 
-        // Ajuste légèrement la position pour éviter de “coller” à la raquette
+        // Adjust ball position to be above paddle and avoid sticking (before launch)
         ball.setPosition({
             ball.getPosition().x,
             paddle.getPosition().y - ball.getRadius() * 2.f - 0.1f
         });
 
-        // Variation de la vitesse horizontale selon le point d’impact
+        // Variation of the hit angle based on where it hits the paddle
         float paddleCenter = paddle.getPosition().x + paddle.getSize().x / 2.f;
         float hitX = ball.getPosition().x + ball.getRadius();
         float offset = (hitX - paddleCenter) / (paddle.getSize().x / 2.f);
