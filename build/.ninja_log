@@ -1,0 +1,7 @@
+# ninja log v7
+6	225	7846639853889354	CMakeFiles/game.dir/src/Paddle.cpp.obj	5cb4c67b37190f2c
+7	250	7846649947786015	CMakeFiles/game.dir/src/Ball.cpp.obj	b05318bf0948a953
+13	696	7846639853969365	CMakeFiles/BricksBreaker.dir/src/main.cpp.obj	861e1da7702d43b6
+2	774	7846639853849351	CMakeFiles/game.dir/src/Game.cpp.obj	3c8fbec9d1e1a1dd
+250	324	7846649950214019	libgame.a	3980400a9503655a
+325	423	7846649950964024	BricksBreaker.exe	6e64d4ac0e53e1d8

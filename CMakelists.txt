@@ -1,0 +1,27 @@
+cmake_minimum_required(VERSION 3.20)
+project(BricksBreaker LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+find_package(SFML 3 COMPONENTS System Window Graphics REQUIRED)
+
+add_library(game STATIC
+src/Game.cpp
+src/Paddle.cpp
+src/Ball.cpp
+)
+
+target_include_directories(game PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
+target_link_libraries(game PUBLIC sfml-graphics sfml-window sfml-system)
+
+if(MSVC)
+target_compile_options(game PRIVATE /W4 /permissive-)
+else()
+target_compile_options(game PRIVATE -Wall -Wextra -Wpedantic -Wconversion)
+endif()
+
+add_executable(BricksBreaker src/main.cpp)
+target_link_libraries(BricksBreaker PRIVATE game)
