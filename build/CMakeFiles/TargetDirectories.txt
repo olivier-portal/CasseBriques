@@ -1,0 +1,4 @@
+C:/Users/porta/OneDrive/Documents/La plateforme/C++/Casse-brique/CasseBriques/build/CMakeFiles/game.dir
+C:/Users/porta/OneDrive/Documents/La plateforme/C++/Casse-brique/CasseBriques/build/CMakeFiles/BricksBreaker.dir
+C:/Users/porta/OneDrive/Documents/La plateforme/C++/Casse-brique/CasseBriques/build/CMakeFiles/edit_cache.dir
+C:/Users/porta/OneDrive/Documents/La plateforme/C++/Casse-brique/CasseBriques/build/CMakeFiles/rebuild_cache.dir
