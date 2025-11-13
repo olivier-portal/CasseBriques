@@ -81,18 +81,37 @@ void Game::handleEvents() {
     }
 }
 
-
 void Game::update(float dtSeconds) {
-(void)dtSeconds; // frame-based
-paddle_.update(dtSeconds, paddleSpeed_, static_cast<float>(width_));
-ball_.update(dtSeconds, static_cast<float>(width_), static_cast<float>(height_), paddle_);
-for (auto& brick : bricks_.bricks()) {
-    if (brick.isAlive() && core::aabbIntersects(ball_.shape().getGlobalBounds(), brick.shape().getGlobalBounds())) {
-        brick.hit();
-        ball_.bounceY();
-        break;
+
+    (void)dtSeconds; // frame-based
+
+    paddle_.update(dtSeconds, paddleSpeed_, static_cast<float>(width_));
+    ball_.update(dtSeconds, static_cast<float>(width_), static_cast<float>(height_), paddle_);
+
+    // Bricks collision with ball
+    for (auto& brick : bricks_.bricks()) {
+        if (brick.isAlive() && core::aabbIntersects(ball_.shape().getGlobalBounds(), brick.shape().getGlobalBounds())) {
+            brick.hit();
+            ball_.bounceY();
+            break;
+        }
     }
-}
+
+    // Victory check
+    bool allDestroyed = true;
+
+    for (const auto& brick : bricks_.bricks()) {
+        if (brick.isAlive()) {
+            allDestroyed = false;
+            break;
+        }
+    }
+
+    if (allDestroyed) {
+        std::cout << "Victory !!!!";
+        window_.close();
+    }
+
 }
 
 
