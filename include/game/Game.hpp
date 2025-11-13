@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Graphics/Texture.hpp>
 #include <string>
 #include "game/Paddle.hpp"
 #include "game/Ball.hpp"
@@ -25,7 +26,19 @@ Paddle paddle_;
 Ball ball_;
 BrickGrid bricks_;
 
-// Config
+// bricks textures
+    sf::Texture texBlue_;
+    sf::Texture texBlueBroken_;
+    sf::Texture texGreen_;
+    sf::Texture texGreenBroken_;
+    sf::Texture texOrange_;
+    sf::Texture texOrangeBroken_;
+    sf::Texture texPurple_;
+    sf::Texture texPurpleBroken_;
+    sf::Texture texRed_;
+    sf::Texture texRedBroken_;
+
+// Set paddle speed
 float paddleSpeed_ { 10.f };
 };
 

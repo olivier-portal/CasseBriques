@@ -13,9 +13,28 @@ Game::Game(unsigned int width, unsigned int height, std::string title)
 , height_{height}
 , paddle_({100.f, 20.f}, { (width / 2.f) - 50.f, height - (10.f + 20.f) })
 , ball_(10.f)
-, bricks_(5, 11, {70.f, 25.f}, 5.f, {35.f, 50.f}) {
+, bricks_(0, 0, {0.f, 0.f}, 0.f, {0.f, 0.f},
+          texBlue_, texBlueBroken_,
+          texGreen_, texGreenBroken_,
+          texOrange_, texOrangeBroken_,
+          texPurple_, texPurpleBroken_,
+          texRed_, texRedBroken_) {
 std::cout << "[INFO] Starting program...";
 sf::sleep(sf::milliseconds(300));
+
+// Loading textures
+    if (!texBlue_.loadFromFile("assets/BlueTile.png") ||
+        !texBlueBroken_.loadFromFile("assets/BreakedBlueTile.png") ||
+        !texGreen_.loadFromFile("assets/GreenTile.png") ||
+        !texGreenBroken_.loadFromFile("assets/BreakedGreenTile.png") ||
+        !texOrange_.loadFromFile("assets/OrangeTile.png") ||
+        !texOrangeBroken_.loadFromFile("assets/BreakedOrangeTile.png") ||
+        !texPurple_.loadFromFile("assets/PurpleTile.png") ||
+        !texPurpleBroken_.loadFromFile("assets/BreakedPurpleTile.png") ||
+        !texRed_.loadFromFile("assets/RedTile.png") ||
+        !texRedBroken_.loadFromFile("assets/BreakedRedTile.png")) {
+        std::cerr << "[ERROR] Could not load brick textures\n";
+    }
 
 
 // Create window
@@ -33,6 +52,22 @@ window_.setFramerateLimit(60);
 // Position of ball on paddle at start
 
 ball_.resetOnPaddle(paddle_);
+
+// Set brick size
+    sf::Vector2f brickSize{96.f, 32.f};
+
+// Set BrickGrid
+bricks_ = BrickGrid(
+        5, 8,                   // 5 rows, 8 colons
+        brickSize,               // Brick size
+        5.f,                     // padding
+        {35.f, 50.f},            // start position 
+        texBlue_, texBlueBroken_,
+        texGreen_, texGreenBroken_,
+        texOrange_, texOrangeBroken_,
+        texPurple_, texPurpleBroken_,
+        texRed_, texRedBroken_
+    );
 
 std::cout << "[INFO] Window open.";
 }

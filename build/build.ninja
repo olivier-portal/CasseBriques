@@ -107,7 +107,7 @@ build CMakeFiles/BricksBreaker.dir/src/main.cpp.obj: CXX_COMPILER__BricksBreaker
 build BricksBreaker.exe: CXX_EXECUTABLE_LINKER__BricksBreaker_ CMakeFiles/BricksBreaker.dir/src/main.cpp.obj | libgame.a || libgame.a
   LINK_LIBRARIES = libgame.a  -lsfml-graphics  -lsfml-window  -lsfml-system  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\BricksBreaker.dir
-  POST_BUILD = cd .
+  POST_BUILD = C:\Windows\system32\cmd.exe /C "cd /D "C:\Users\porta\OneDrive\Documents\La plateforme\C++\Casse-brique\CasseBriques\build" && C:\msys64\mingw64\bin\cmake.exe -E copy_directory "C:/Users/porta/OneDrive/Documents/La plateforme/C++/Casse-brique/CasseBriques/assets" "C:/Users/porta/OneDrive/Documents/La plateforme/C++/Casse-brique/CasseBriques/build/assets""
   PRE_LINK = cd .
   TARGET_FILE = BricksBreaker.exe
   TARGET_IMPLIB = libBricksBreaker.dll.a

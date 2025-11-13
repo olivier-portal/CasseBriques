@@ -25,3 +25,10 @@ endif()
 
 add_executable(BricksBreaker src/main.cpp)
 target_link_libraries(BricksBreaker PRIVATE game)
+
+add_custom_command(
+    TARGET BricksBreaker POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/assets
+        ${CMAKE_BINARY_DIR}/assets
+)

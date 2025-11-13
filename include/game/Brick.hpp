@@ -5,10 +5,12 @@
 namespace game {
     class Brick {
     public:
-        Brick(sf::Vector2f pos, sf::Vector2f size, int hp) : hp_(hp), maxHp_(hp) {
+        Brick(sf::Vector2f pos, sf::Vector2f size, const sf::Texture* normalTex, const sf::Texture* crackedTex, int hp) :
+        normalTex_{normalTex}, crackedTex_{crackedTex}, hp_(hp), maxHp_(hp) {
             shape_.setPosition(pos);
             shape_.setSize(size);
-            updateColor();
+            shape_.setFillColor(sf::Color::White); // No color
+            updateTexture();
         }
 
         void render(sf::RenderTarget& target) const {
@@ -20,23 +22,34 @@ namespace game {
 
         void hit() noexcept {
             if (hp_ > 0) {
-                hp_--;
-                updateColor();
+                --hp_;
+                updateTexture();
             }
         }
 
         const sf::RectangleShape& shape() const noexcept { return shape_; }
 
         private:
-        void updateColor() {
-            switch (hp_) {
-                case 3: shape_.setFillColor(sf::Color(150, 150, 150)); break; // gray
-                case 2: shape_.setFillColor(sf::Color(255, 60, 60)); break;   // red
-                case 1: shape_.setFillColor(sf::Color(255, 200, 0)); break;   // Yellow
-                default: shape_.setFillColor(sf::Color::Transparent); break;  // invisible
-            }
+        void updateTexture() {
+           if (hp_ <= 0) {
+            // on pourrait aussi mettre alpha 0
+            shape_.setTexture(nullptr);
+            shape_.setFillColor(sf::Color::Transparent);
+            return;
+        }
+
+        if (hp_ >= 2) {
+            // full HP / normal sprite
+            if (normalTex_) shape_.setTexture(normalTex_);
+        } else if (hp_ == 1) {
+            // dernier HP / broken sprite
+            if (crackedTex_) shape_.setTexture(crackedTex_);
+            else if (normalTex_) shape_.setTexture(normalTex_);
+        }
         }
         sf::RectangleShape shape_;
+        const sf::Texture*  normalTex_{nullptr};
+        const sf::Texture*  crackedTex_{nullptr};
         int hp_{0};
         int maxHp_{0};
     };
