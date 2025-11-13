@@ -13,8 +13,10 @@ public:
         for (unsigned r = 0; r < rows; ++r) {
             for (unsigned c = 0; c < cols; ++c) {
                 int hp = 1;
-                if (hp == 0) hp = 3;
-                else if (hp == 1) hp = 2;
+                if (r == 0) hp = 3;
+                else if (r == 1) hp = 2;
+                else if (r == 3) hp = 2;
+                else if (r == 4) hp = 3;
                 else hp = 1;
 
                 sf::Vector2f pos {

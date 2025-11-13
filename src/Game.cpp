@@ -13,7 +13,7 @@ Game::Game(unsigned int width, unsigned int height, std::string title)
 , height_{height}
 , paddle_({100.f, 20.f}, { (width / 2.f) - 50.f, height - (10.f + 20.f) })
 , ball_(10.f)
-, bricks_(5, 10, {70.f, 25.f}, 5.f, {35.f, 50.f}) {
+, bricks_(5, 11, {70.f, 25.f}, 5.f, {35.f, 50.f}) {
 std::cout << "[INFO] Starting program...";
 sf::sleep(sf::milliseconds(300));
 
