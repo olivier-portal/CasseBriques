@@ -5,3 +5,9 @@
 2	774	7846639853849351	CMakeFiles/game.dir/src/Game.cpp.obj	3c8fbec9d1e1a1dd
 250	324	7846649950214019	libgame.a	3980400a9503655a
 325	423	7846649950964024	BricksBreaker.exe	6e64d4ac0e53e1d8
+11	537	7847440269779995	CMakeFiles/game.dir/src/Paddle.cpp.obj	5cb4c67b37190f2c
+16	550	7847440269830004	CMakeFiles/game.dir/src/Ball.cpp.obj	b05318bf0948a953
+21	1301	7847440269870003	CMakeFiles/BricksBreaker.dir/src/main.cpp.obj	861e1da7702d43b6
+7	1391	7847440269729955	CMakeFiles/game.dir/src/Game.cpp.obj	3c8fbec9d1e1a1dd
+1394	1596	7847440283605593	libgame.a	3980400a9503655a
+1596	1897	7847440285627070	BricksBreaker.exe	6e64d4ac0e53e1d8

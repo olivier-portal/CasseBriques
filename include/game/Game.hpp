@@ -3,6 +3,7 @@
 #include <string>
 #include "game/Paddle.hpp"
 #include "game/Ball.hpp"
+#include "game/BrickGrid.hpp"
 
 namespace game {
 
@@ -22,6 +23,7 @@ unsigned int height_{};
 
 Paddle paddle_;
 Ball ball_;
+BrickGrid bricks_;
 
 // Config
 float paddleSpeed_ { 10.f };

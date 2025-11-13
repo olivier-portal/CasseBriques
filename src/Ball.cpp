@@ -30,6 +30,11 @@ velocity_ = initialVelocity;
 launched_ = true;
 }
 
+// Bounce on bricks
+void Ball::bounceY() noexcept {
+    velocity_.y = -velocity_.y;
+}
+
 void Ball::update(float /*dtSeconds*/, float screenWidth, float screenHeight, const Paddle& paddle) noexcept {
 // Launched if spaceBar is pressed
 if (!launched_ && sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)) {
@@ -74,7 +79,6 @@ if (velocity_.y > 0.f && core::aabbIntersects(shape_.getGlobalBounds(), paddle.s
     const float offset = (hitX - paddleCenter) / (paddle.shape().getSize().x / 2.f); // [-1, 1]
     velocity_.x = 7.f * offset;
 }
-
 
 // Ball resets if below screen
 if (shape_.getPosition().y > screenHeight) {

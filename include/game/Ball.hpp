@@ -15,6 +15,7 @@ void resetOnPaddle(const Paddle& paddle) noexcept;
 void launch(sf::Vector2f initialVelocity) noexcept;
 void update(float dtSeconds, float screenWidth, float screenHeight, const Paddle& paddle) noexcept;
 void render(sf::RenderTarget& target) const;
+void bounceY() noexcept;
 
 [[nodiscard]] const sf::CircleShape& shape() const noexcept { return shape_; }
 [[nodiscard]] sf::CircleShape& shape() noexcept { return shape_; }
