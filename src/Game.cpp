@@ -31,8 +31,7 @@ window_.requestFocus();
 window_.setFramerateLimit(60);
 
 // Position of ball on paddle at start
-paddle_ = Paddle({100.f, 20.f}, { (width_ / 2.f) - 50.f, height_ - (10.f + 20.f) });
-ball_ = Ball(10.f);
+
 ball_.resetOnPaddle(paddle_);
 
 std::cout << "[INFO] Window open.";
