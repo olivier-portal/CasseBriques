@@ -1,6 +1,8 @@
 #pragma once
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Texture.hpp>
+#include <SFML/Graphics/Font.hpp>
+#include <SFML/Graphics/Text.hpp>
 #include <string>
 #include "game/Paddle.hpp"
 #include "game/Ball.hpp"
@@ -38,8 +40,13 @@ BrickGrid bricks_;
     sf::Texture texRed_;
     sf::Texture texRedBroken_;
 
+// Show victory
+    sf::Font font_;
+    sf::Text victoryText_;
+    bool victory_{false};
+
 // Set paddle speed
-float paddleSpeed_ { 10.f };
-};
+    float paddleSpeed_ { 10.f };
+    };
 
 } // namespace game

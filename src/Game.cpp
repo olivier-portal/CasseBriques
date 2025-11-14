@@ -3,6 +3,9 @@
 #include "core/Collision.hpp"
 #include <SFML/Window/Event.hpp>
 #include <SFML/System/Sleep.hpp>
+#include <SFML/Graphics/Font.hpp>
+#include <SFML/Graphics/Text.hpp>
+#include <string>
 #include <iostream>
 
 namespace game {
@@ -18,7 +21,9 @@ Game::Game(unsigned int width, unsigned int height, std::string title)
           texGreen_, texGreenBroken_,
           texOrange_, texOrangeBroken_,
           texPurple_, texPurpleBroken_,
-          texRed_, texRedBroken_) {
+          texRed_, texRedBroken_)
+, font_{}
+, victoryText_{font_, "YOU WON !!!", 64} {
 std::cout << "[INFO] Starting program...";
 sf::sleep(sf::milliseconds(300));
 
@@ -52,6 +57,22 @@ window_.setFramerateLimit(60);
 // Position of ball on paddle at start
 
 ball_.resetOnPaddle(paddle_);
+
+// Load font
+// Load font
+if (!font_.openFromFile("assets/Pixel-Regular.ttf")) {
+    std::cerr << "[ERROR] Impossible de charger la police\n";
+}
+
+// Configure victory text
+victoryText_.setFillColor(sf::Color::Yellow);
+victoryText_.setString("YOU WON !!!");
+
+// Center text
+victoryText_.setPosition({
+    width_ / 2.f - 80.f,
+    height_ / 2.f
+});
 
 // Set brick size
     sf::Vector2f brickSize{96.f, 32.f};
@@ -107,12 +128,14 @@ void Game::update(float dtSeconds) {
         }
     }
 
-    if (allDestroyed) {
-        std::cout << "Victory !!!!";
-        window_.close();
+    if (allDestroyed && !victory_) {
+        victory_ = true;
+        ball_.stop();                 // si tu as ajouté cette méthode
+        ball_.resetOnPaddle(paddle_);
     }
 
-}
+
+    }
 
 
 void Game::render() {
@@ -120,6 +143,11 @@ window_.clear(sf::Color(57, 61, 71));
 paddle_.render(window_);
 ball_.render(window_);
 bricks_.render(window_);
+
+if (victory_) {
+    window_.draw(victoryText_);
+}
+
 window_.display();
 }
 

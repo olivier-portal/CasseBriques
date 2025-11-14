@@ -20,6 +20,11 @@ void bounceY() noexcept;
 [[nodiscard]] const sf::CircleShape& shape() const noexcept { return shape_; }
 [[nodiscard]] sf::CircleShape& shape() noexcept { return shape_; }
 
+ void stop() noexcept {
+        launched_ = false;
+        velocity_ = {0.f, 0.f};
+    }
+
 private:
 sf::CircleShape shape_;
 sf::Vector2f velocity_{0.f, 0.f};
