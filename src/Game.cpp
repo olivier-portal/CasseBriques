@@ -70,8 +70,8 @@ victoryText_.setString("YOU WON !!!");
 
 // Center text
 victoryText_.setPosition({
-    width_ / 2.f - 80.f,
-    height_ / 2.f
+    width_ / 2.f - 220.f,
+    height_ / 2.f - 50.f
 });
 
 // Set brick size
