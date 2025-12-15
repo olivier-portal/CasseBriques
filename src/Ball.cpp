@@ -38,7 +38,7 @@ void Ball::bounceY() noexcept {
 void Ball::update(float /*dtSeconds*/, float screenWidth, float screenHeight, const Paddle& paddle) noexcept {
 // Launched if spaceBar is pressed
 if (!launched_ && sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)) {
-launch({4.f, -6.f});
+launch({0.f, -6.f});
 }
 
 if (!launched_) {
