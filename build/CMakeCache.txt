@@ -34,7 +34,7 @@ CMAKE_AR:FILEPATH=C:/msys64/mingw64/bin/ar.exe
 CMAKE_BUILD_TYPE:STRING=
 
 //CXX compiler
-CMAKE_CXX_COMPILER:FILEPATH=C:/msys64/mingw64/bin/c++.exe
+CMAKE_CXX_COMPILER:STRING=C:/msys64/mingw64/bin/c++.exe
 
 //A wrapper around 'ar' adding the appropriate '--plugin' option
 // for the GCC compiler
@@ -142,6 +142,9 @@ CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 //Value Computed by CMake
 CMAKE_PROJECT_NAME:STATIC=BricksBreaker
 
+//Value Computed by CMake
+CMAKE_PROJECT_SPDX_LICENSE:STATIC=
+
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=C:/msys64/mingw64/bin/ranlib.exe
 
@@ -245,9 +248,9 @@ CMAKE_CACHEFILE_DIR:INTERNAL=c:/Users/porta/OneDrive/Documents/La plateforme/C++
 //Major version of cmake used to create the current loaded cache
 CMAKE_CACHE_MAJOR_VERSION:INTERNAL=4
 //Minor version of cmake used to create the current loaded cache
-CMAKE_CACHE_MINOR_VERSION:INTERNAL=1
+CMAKE_CACHE_MINOR_VERSION:INTERNAL=2
 //Patch version of cmake used to create the current loaded cache
-CMAKE_CACHE_PATCH_VERSION:INTERNAL=2
+CMAKE_CACHE_PATCH_VERSION:INTERNAL=1
 //Path to CMake executable.
 CMAKE_COMMAND:INTERNAL=C:/msys64/mingw64/bin/cmake.exe
 //Path to cpack program executable.

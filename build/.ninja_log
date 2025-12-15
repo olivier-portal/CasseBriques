@@ -1,10 +1,11 @@
 # ninja log v7
 10	320	7848309460207642	CMakeFiles/game.dir/src/Paddle.cpp.obj	5cb4c67b37190f2c
-8	377	7874920193094757	CMakeFiles/game.dir/src/Ball.cpp.obj	b05318bf0948a953
+7	367	7874920614650542	CMakeFiles/game.dir/src/Ball.cpp.obj	b05318bf0948a953
 19	1083	7848309460299934	CMakeFiles/BricksBreaker.dir/src/main.cpp.obj	861e1da7702d43b6
 9	1195	7874900594286006	CMakeFiles/game.dir/src/Game.cpp.obj	3c8fbec9d1e1a1dd
-377	549	7874920196766375	libgame.a	3980400a9503655a
-549	982	7874920198470993	BricksBreaker.exe	d29c4b993e9a7e5f
-7	367	7874920614650542	CMakeFiles/game.dir/src/Ball.cpp.obj	b05318bf0948a953
 367	524	7874920618261315	libgame.a	3980400a9503655a
 524	809	7874920619797280	BricksBreaker.exe	d29c4b993e9a7e5f
+7	233	7875067885338351	CMakeFiles/game.dir/src/Paddle.cpp.obj	5cb4c67b37190f2c
+234	482	7875067887608274	libgame.a	3980400a9503655a
+13	806	7875067885398273	CMakeFiles/BricksBreaker.dir/src/main.cpp.obj	861e1da7702d43b6
+807	1089	7875067893327391	BricksBreaker.exe	d29c4b993e9a7e5f
